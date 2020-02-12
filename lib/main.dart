@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -25,6 +27,7 @@ class DicePage extends StatefulWidget {
 class _DicePageState extends State<DicePage> {
   // Places this variable outside of the build function because we don't want to create a new variable every time we reload.
   int leftDiceNumber = 1;
+  int rightDiceNumber = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +49,7 @@ class _DicePageState extends State<DicePage> {
                 // If it is, then it will redraw it.
                 // if setState wasn't here, the variable leftDiceNumber would change to 2 but it wouldn't reflect on the UI
                 setState(() {
-                  leftDiceNumber = 2;
+                  leftDiceNumber = 1 + Random().nextInt(6);
                 });
               },
               child: Image.asset('images/dice$leftDiceNumber.png'),
@@ -59,9 +62,11 @@ class _DicePageState extends State<DicePage> {
             flex: 1,
             child: FlatButton(
               onPressed: () {
-                print('Pressed the right image');
+                setState(() {
+                  rightDiceNumber = 1 + Random().nextInt(6);
+                });
               },
-              child: Image.asset('images/dice2.png'),
+              child: Image.asset('images/dice$rightDiceNumber.png'),
             ),
           ),
         ],

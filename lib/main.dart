@@ -29,6 +29,17 @@ class _DicePageState extends State<DicePage> {
   int leftDiceNumber = 1;
   int rightDiceNumber = 1;
 
+  void rollDice() {
+    // Place code here that will update information.
+    // setState checks the build function and checks to see if that data is used anywhere else in the code.
+    // If it is, then it will redraw it.
+    // if setState wasn't here, the variable leftDiceNumber would change to 2 but it wouldn't reflect on the UI
+    setState(() {
+      leftDiceNumber = 1 + Random().nextInt(6);
+      rightDiceNumber = 1 + Random().nextInt(6);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -44,13 +55,7 @@ class _DicePageState extends State<DicePage> {
             // Image.asset('images/dice2.png') is a short hand way of doing the commented code below.
             child: FlatButton(
               onPressed: () {
-                // Place code here that will update information.
-                // setState checks the build function and checks to see if that data is used anywhere else in the code.
-                // If it is, then it will redraw it.
-                // if setState wasn't here, the variable leftDiceNumber would change to 2 but it wouldn't reflect on the UI
-                setState(() {
-                  leftDiceNumber = 1 + Random().nextInt(6);
-                });
+                rollDice();
               },
               child: Image.asset('images/dice$leftDiceNumber.png'),
             ),
@@ -62,9 +67,7 @@ class _DicePageState extends State<DicePage> {
             flex: 1,
             child: FlatButton(
               onPressed: () {
-                setState(() {
-                  rightDiceNumber = 1 + Random().nextInt(6);
-                });
+                rollDice();
               },
               child: Image.asset('images/dice$rightDiceNumber.png'),
             ),
